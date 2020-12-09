@@ -2,7 +2,8 @@ import { setNewProperty } from 'functionallibrary';
 import {
 	axisBottom,
 	axisLeft,
-	curveNatural,
+	// curveNatural,
+	curveStep,
 	line,
 	max,
 	min,
@@ -12,7 +13,7 @@ import {
 	// transition,
 } from 'd3';
 
-const curve = curveNatural;
+const curve = curveStep;
 
 class Line {
 	constructor({ container, height, width }) {
@@ -35,7 +36,7 @@ class Line {
 		this.y = null;
 
 		this.height = height;
-		this.margin = { bottom: 20, left: 40, right: 20, top: 20 };
+		this.margin = { bottom: 40, left: 40, right: 20, top: 30 };
 		this.width = width;
 
 		this.duration = 2000;
@@ -62,6 +63,9 @@ class Line {
 		this.axisX(currentData, oldData);
 		this.axisY(currentData, oldData);
 
+		this.axisXLabel();
+		this.axisYLabel();
+
 		this.currentCircle(currentData);
 		this.currentLabel(currentData);
 		this.drawCurrentLine(currentData);
@@ -74,7 +78,6 @@ class Line {
 	axisX() {
 		this.x = scaleBand()
 			.domain(this.hours)
-			// .domain([0, 23])
 			.range([this.margin.left, this.width - this.margin.right]);
 
 		this.axisXContainer
@@ -117,7 +120,7 @@ class Line {
 					.call((e) => e.transition().duration(that.duration)
 						.attr('cy', (d) => that.y(d.temp))),
 				(update) => update
-					.call((el) => el.transition().duration(that.duration)
+					.call((el) => el.transition().duration(250)
 						.attr('cx', (d) => that.x(d.datetime) + (that.x.bandwidth() / 2))
 						.attr('cy', (d) => that.y(d.temp))),
 				(exit) => exit.remove(),
@@ -141,7 +144,7 @@ class Line {
 					.call((e) => e.transition().duration(that.duration).delay(200)
 						.attr('y', (d) => that.y(d.temp) - 8)),
 				(update) => update
-					.call((el) => el.transition().duration(that.duration)
+					.call((el) => el.transition().duration(250)
 						.attr('x', (d) => that.x(d.datetime) + (that.x.bandwidth() / 2) - 7)
 						.attr('y', (d) => that.y(d.temp) - 8)),
 				(exit) => exit.remove(),
@@ -159,7 +162,7 @@ class Line {
 			.y((d) => that.y(d.temp));
 
 		this.currentPath
-			.attr('class', 'exr-today-line')
+			.attr('class', 'exr-today-line opacity-75')
 			.attr('dasharray', noNullableValues.length)
 			.attr('d', currentLine(current.data));
 	}
@@ -172,7 +175,7 @@ class Line {
 			.y((d) => that.y(d.temp));
 
 		this.oldPath
-			.attr('class', 'exr-outdate-line')
+			.attr('class', 'exr-outdate-line opacity-50')
 			.attr('d', oldLine(oldData.data));
 	}
 
@@ -191,8 +194,9 @@ class Line {
 					.call((e) => e.transition().duration(that.duration).delay(200)
 						.attr('cy', (d) => that.y(d.temp))),
 				(update) => update
-					.attr('cx', (d) => that.x(d.datetime) + (that.x.bandwidth() / 2))
-					.attr('cy', (d) => that.y(d.temp)),
+					.call((el) => el.transition().duration(250)
+						.attr('cx', (d) => that.x(d.datetime) + (that.x.bandwidth() / 2))
+						.attr('cy', (d) => that.y(d.temp))),
 				(exit) => exit.remove(),
 			)
 			.attr('class', 'exr-outdate-circle')
@@ -214,13 +218,33 @@ class Line {
 					.call((e) => e.transition().duration(that.duration).delay(200)
 						.attr('y', (d) => that.y(d.temp) - 8)),
 				(update) => update
-					.call((el) => el.transition().duration(that.duration)
+					.call((el) => el.transition().duration(250)
 						.attr('x', (d) => that.x(d.datetime) + (that.x.bandwidth() / 2) - 7)
 						.attr('y', (d) => that.y(d.temp) - 8)),
 				(exit) => exit.remove(),
 			)
 			.attr('class', 'exr-outdate-label')
 			.text((d) => d.temp);
+	}
+
+	axisXLabel() {
+		this.svg
+			.append('g')
+			.attr('data-iden', 'axisX-name')
+			.attr('transform', `translate(${this.width / 2}, ${this.height})`)
+			.attr('class', 'font-poppins-regular fill-secondary')
+			.append('text')
+			.text('Horas');
+	}
+
+	axisYLabel() {
+		this.svg
+			.append('g')
+			.attr('data-iden', 'axisY-name')
+			.attr('transform', `translate(0, ${this.margin.top / 2})`)
+			.attr('class', 'font-poppins-regular fill-secondary')
+			.append('text')
+			.text('Temperatura (K)');
 	}
 }
 

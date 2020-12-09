@@ -26,7 +26,11 @@
   }
 }
 
-.font-poppins {
+.font-poppins-bold {
+	font-family: Poppins;
+	font-weight: 900;
+}
+.font-poppins-regular {
 	font-family: Poppins;
 }
 
@@ -35,15 +39,16 @@
 .exr-outdate-label,
 .exr-today-line,
 .exr-today-circle {
+	@apply stroke-lastYear;
+
 	fill: none;
-	stroke: #61b15a;
 	stroke-width: 4;
 }
 
 .exr-today-line,
 .exr-today-circle,
 .exr-today-label {
-	stroke: #fd3a69;
+	@apply stroke-today;
 }
 
 .exr-today-label,

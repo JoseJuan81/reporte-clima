@@ -1,12 +1,15 @@
 <template>
 	<div>
 		<h1
-			class="text-5xl font-black my-8 font-poppins px-4"
+			class="text-5xl font-black my-8 font-poppins-bold px-4 text-gray-600"
 		>Seleccione una ciudad</h1>
 
 		<div class="h-12 w-full md:w-1/3 px-4 mx-auto">
 			<select
-				class="h-full w-full border border-gray-300 border-solid"
+				:class="[
+					'h-full w-full border border-gray-300 border-solid px-6',
+					'font-poppins-regular text-secondary',
+				]"
 				name="cities"
 				v-model="selectedCity.city_name"
 				@change="setNewCity"
@@ -18,8 +21,27 @@
 			</select>
 		</div>
 
+		<h3
+			class="text-2xl font-poppins-bold px-4 my-4 ml-8 text-gray-400 text-left"
+		>
+			Gráfica: <span class="text-gray-600 ml-4">
+				Temperatura por hora
+				</span>
+		</h3>
+		<h3
+			class="text-2xl font-poppins-bold px-4 my-4 ml-8 text-gray-400 text-left"
+		>
+			Día: <span class="text-gray-600 ml-4">
+				Hoy,
+					<span class="text-today">{{new Date().toLocaleDateString()}}</span>
+					<span class="text-lastYear ml-4">({{
+						new Date(getLastYear()).toLocaleDateString()
+					}})</span>
+				</span>
+		</h3>
+
 		<WeatherChart
-			class="mt-12 px-4"
+			class="mt-8 px-4"
 			:currentData="selectedCityTodayWeatherData"
 			:aYearAgoData="selectedCityLastYearWeatherData"
 		/>

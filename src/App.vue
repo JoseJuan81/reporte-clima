@@ -25,4 +25,29 @@
     }
   }
 }
+
+.font-poppins {
+	font-family: Poppins;
+}
+
+.exr-outdate-line,
+.exr-outdate-circle,
+.exr-outdate-label,
+.exr-today-line,
+.exr-today-circle {
+	fill: none;
+	stroke: #61b15a;
+	stroke-width: 4;
+}
+
+.exr-today-line,
+.exr-today-circle,
+.exr-today-label {
+	stroke: #fd3a69;
+}
+
+.exr-today-label,
+.exr-outdate-label {
+	stroke-width: 1;
+}
 </style>

@@ -46,10 +46,11 @@ npm install
 ```
 
 ### Compilar proyecto en ambiente de desarrollo
-Crear un archivo `.env` con las variables de entorno:
+Crear un archivo `.env` en la raíz del proyecto con las variables de entorno:
 - VUE_APP_WEATHER_API=https://api.weatherbit.io/v2.0/history/
 - VUE_APP_WEATHER_API_KEY=tu_api_key
-Una vez que se instalaron las dependencias ejecutar en la terminal
+  
+Con el `.env` configurado y las dependencias instaladas, ejecutar en la terminal
 ```
 npm run dev
 ```

@@ -244,7 +244,7 @@ class Line {
 			.attr('transform', `translate(0, ${this.margin.top / 2})`)
 			.attr('class', 'font-poppins-regular fill-secondary')
 			.append('text')
-			.text('Temperatura (K)');
+			.text('Temperatura (C)');
 	}
 }
 

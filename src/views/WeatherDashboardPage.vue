@@ -22,14 +22,14 @@
 		</div>
 
 		<h3
-			class="text-2xl font-poppins-bold px-4 my-4 ml-8 text-gray-400 text-left"
+			class="text-xl md:text-2xl font-poppins-bold px-4 my-4 md:ml-8 text-gray-400 text-left"
 		>
 			Gráfica: <span class="text-gray-600 ml-4">
 				Temperatura por hora
 				</span>
 		</h3>
 		<h3
-			class="text-2xl font-poppins-bold px-4 my-4 ml-8 text-gray-400 text-left"
+			class="text-xl md:text-2xl font-poppins-bold px-4 my-4 md:ml-8 text-gray-400 text-left"
 		>
 			Día: <span class="text-gray-600 ml-4">
 				Hoy,
